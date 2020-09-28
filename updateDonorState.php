@@ -14,8 +14,15 @@ if (!is_null($donor_state) && !empty($contact_id)) {
   if (!$contact_id) {
     echo "Error";
   } else {
-    echo "Success! Donor State saved to CiviCRM.<br>";
-    echo "Donor State: " . $donor_state . ' Contact Id: ' . $contact_id;
+
+    $result = [
+      "message" => "Success! Donor State saved to CiviCRM.",
+      "contactID" => $contact_id,
+      "donorState" => $donor_state,
+    ];
+
+    echo json_encode($result);
+
   }
 
 } else {

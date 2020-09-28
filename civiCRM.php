@@ -81,13 +81,14 @@
     
   }  
 
-  // Get MAIN PRIMARY email for a contact in CiviCRM.
+  // Get PRIMARY email for a contact in CiviCRM.
   // contact_id (int)
   // @returns email or NULL if not found
   function get_email_civicrm($contact_id) {
 
     //debug_to_console( "checking for existing email..." );
-    $jsondata = '{"sequential":1,"return":["email"],"contact_id":'.$contact_id.',"location_type_id":3,"is_primary":1}';
+    // $jsondata = '{"sequential":1,"return":["email"],"contact_id":'.$contact_id.',"location_type_id":3,"is_primary":1}';
+    $jsondata = '{"sequential":1,"return":["email"],"contact_id":'.$contact_id.',"is_primary":1}';
     //debug_to_console( $jsondata );
     $curl_response = civicrm_api( 'Email', 'get', $jsondata );
     //debug_to_console( $curl_response );

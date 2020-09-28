@@ -23,7 +23,7 @@
 //foreach ($contact_list as $contact) {
 
   // Sample Code to lookup a contact in CiviCRM by email
-  $contact_json = get_contact_civicrm( 'john.patton@mobilization.org', NULL );
+  $contact_json = get_contact_civicrm( 'Lisandra.Meller@foomail.com', NULL );
 
   debug_to_console( $contact_json );
 
@@ -40,7 +40,7 @@
       echo "<br>Zip: " . $contact_json["postal_code"];
       echo "<br>Phone: " . $contact_json["phone"];
 
-      echo "<br><br>Donor State: " . $contact_json["custom_413"]; // Donor State -- used for the AJAX example below
+      echo "<p>Donor State: <span id='donor_state'>" . $contact_json["custom_413"] . "</span></p>"; // Donor State -- used for the AJAX example below
 
 
   } else {
@@ -56,7 +56,7 @@
 <br><br><br>
 
 <!-- 
-  Example of how to update a value in CiviCRM using AJAX. This example updates a field called Donor Date using to whatever is selected in the menu.
+  Example of how to update a value in CiviCRM using AJAX. This example updates a field called Donor Date using what is selected in the menu.
   You can do something similiar to allow the user to update the editable fields in the table.
  -->
  <h2>Select a Donor State to update this value in CiviCRM for this contact:</h2>

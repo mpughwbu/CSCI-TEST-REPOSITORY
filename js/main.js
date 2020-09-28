@@ -15,13 +15,19 @@ $(".donorState").change(function() { /* WHEN YOU CHANGE AND SELECT FROM THE SELE
     url: "updateDonorState.php", /* PAGE WHERE WE WILL PASS THE DATA */
     data: { donorState: donorState, contactId: contactId }
   })    
-  .done(function(data) { // if getting done then call.
+  .done(function(response) { // if getting done then call.
 
-    if (data == 'Error')
+    if (response == 'Error')
       alert( "Error. Failed to save Donor State to CiviCRM." );
     
+    var resultData = JSON.parse(response);
+    //$('#tableInfo').html(arrayToTable(resultData));
+
     // show the response on page
-    $('#response2').html(data);
+    alert( resultData.message );
+    $('#response2').html(resultData.message);
+    $('#donor_state').html(resultData.donorState);
+  
 
   })
   .fail(function() { // if fail then getting message
