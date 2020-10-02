@@ -404,7 +404,7 @@ function add_activity_civicrm($with_contact_id = NULL, $activity_data = array(),
   $is_error = $json['is_error'];
   return $is_error;
 
-}
+  }
 
   // Search for a contact by email in CiviCRM, in the specified group and return these fields:
   // @param $email - primary email address to search, if null will return all contacts in the group
