@@ -3,7 +3,11 @@
 <head>
 
   <title>Team Tracker Report</title>
-  <?php include 'civiCRM.php';?>
+  <?php
+  include 'civiCRM.php';
+  require __DIR__ . '/vendor/autoload.php';
+  require __DIR__ . '/gsheetSetup.php';
+  ?>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
@@ -16,9 +20,29 @@
 <?php 
 
 
-
 // Read the Tracker data from the Antarctica Team Tracker Google Sheet here. This gives you a list of contacts.
 //$contact_list = get_contacts_from_googlesheet(); // you'll need to write some type of function like this perhaps
+
+$range = 'Sue!B21:G35';
+// $range = 'Joe!B21:G35';
+
+$rows = $sheets->spreadsheets_values->get($spreadsheetId, $range);
+$values = $rows->getValues();
+
+echo "<h2>Data collected from 'Antarctica Team Tracker' Google Sheet:</h2>";
+if (empty($values)) {
+    echo "No data found.\n";
+} else {
+    foreach ($values as $row) {
+      echo "Rank: " . $row[0] . "<br>";
+      echo "Name: " . $row[1] . "<br>";
+      echo "Email: " . $row[2] . "<br>";
+      echo "Pool: " . $row[3] . "<br>";
+      echo "Next Meeting Plan: " . $row[4] . "<br>";
+      echo "Status: " . $row[5] . "<br><br>";
+    }
+}
+
 
 // Lookup each contact in CiviCRM by email
 //foreach ($contact_list as $contact) {
@@ -30,23 +54,23 @@
 
   if (!empty($contact_json)) { // If the email exists
 
-      echo "<h2>Sample Contact Returned from CiviCRM:</h2>";
-      echo "<br>Contact ID: " . $contact_json["contact_id"];
+    echo "<h2>Sample Contact Returned from CiviCRM:</h2>";
+    echo "<br>Contact ID: " . $contact_json["contact_id"];
 
-      echo "<br>Last Contact Date: " . $contact_json["custom_422"]; // Last Contact Date
-      echo "<br>Phone: " . $contact_json["phone"];
-      echo "<br>Street: " . $contact_json["street_address"];
-      echo "<br>City: " . $contact_json["city"];
-      echo "<br>State: " . $contact_json["state_province_name"];
-      echo "<br>Zip: " . $contact_json["postal_code"];
-      echo "<br>Phone: " . $contact_json["phone"];
+    echo "<br>Last Contact Date: " . $contact_json["custom_422"]; // Last Contact Date
+    echo "<br>Phone: " . $contact_json["phone"];
+    echo "<br>Street: " . $contact_json["street_address"];
+    echo "<br>City: " . $contact_json["city"];
+    echo "<br>State: " . $contact_json["state_province_name"];
+    echo "<br>Zip: " . $contact_json["postal_code"];
+    echo "<br>Phone: " . $contact_json["phone"];
 
-      echo "<p>Donor State: <span id='donor_state'>" . $contact_json["custom_413"] . "</span></p>"; // Donor State -- used for the AJAX example below
+    echo "<p>Donor State: <span id='donor_state'>" . $contact_json["custom_413"] . "</span></p>"; // Donor State -- used for the AJAX example below
 
 
   } else {
 
-      echo "Not found.";
+    echo "Not found.";
   }
 
 //}
