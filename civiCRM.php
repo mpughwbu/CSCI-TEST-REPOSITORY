@@ -9,7 +9,6 @@
       $output = "<script>console.log( 'Debug Objects: " . esc_attr($data) . "' );</script>";
     echo $output;
   }
-
   // Worker method to make a CiviCRM API call
   function civicrm_api( $entity, $action, $jsondata )
   {

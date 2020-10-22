@@ -9,15 +9,31 @@
   require __DIR__ . '/gsheetSetup.php';
   ?>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
-  <script type="text/javascript" src="js/main.js"></script>
-
-
+        <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 
-<?php 
+<header class="main-header">
+    <img src="images/Climbing-AdobeStock_285907187.jpg" alt="" width="600" align="center"><br>
+   <br>
+    <nav>
+        <ul><li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="">Extra</a></li>
+            <li><a href="">Extra2</a></li>
+            <li><a href="">Extra3</a></li>
+        </ul>
+    </nav>
+    <hr>
+</header>
+<br><br><br>
+
+
+
+<?php
 
 
 // Read the Tracker data from the Antarctica Team Tracker Google Sheet here. This gives you a list of contacts.
@@ -30,18 +46,46 @@ $rows = $sheets->spreadsheets_values->get($spreadsheetId, $range);
 $values = $rows->getValues();
 
 echo "<h2>Data collected from 'Antarctica Team Tracker' Google Sheet:</h2>";
+
+
+
 if (empty($values)) {
     echo "No data found.\n";
 } else {
     foreach ($values as $row) {
-      echo "Rank: " . $row[0] . "<br>";
-      echo "Name: " . $row[1] . "<br>";
-      echo "Email: " . $row[2] . "<br>";
-      echo "Pool: " . $row[3] . "<br>";
-      echo "Next Meeting Plan: " . $row[4] . "<br>";
-      echo "Status: " . $row[5] . "<br><br>";
+   /*     echo "Rank: " . $row[0] . "<br>";
+        echo "Name: " . $row[1] . "<br>";
+        echo "Email: " . $row[2] . "<br>";
+        echo "Pool: " . $row[3] . "<br>";
+        echo "Next Meeting Plan: " . $row[4] . "<br>";
+        echo "Status: " . $row[5] . "<br><br>";
+*/
+
+        echo "<table border='1'>";
+       // echo "<tr>";
+        echo "<th >Rank</th>";
+        echo "<th>Name</th>";
+        echo "<th>Email</th>";
+        echo "<th>Pool</th>";
+        echo "<th>Next Meeting Plan</th>";
+        echo "<th>Status</th>";
+       // echo "</tr>";
+
+
+        echo "<tr>";
+        echo "<td>$row[0]</td>"."<br>";
+        echo "<td>$row[1]</td>";
+        echo "<td>$row[2]</td>";
+        echo "<td>$row[3]</td>";
+        echo "<td>$row[4]</td>";
+        echo "<td>$row[5]</td>";
+        echo "</tr>";
+        echo "</table>";
     }
 }
+
+
+
 
 
 // Lookup each contact in CiviCRM by email
@@ -78,7 +122,14 @@ if (empty($values)) {
 
 ?>
 
+
+
+</table>
+
 <br><br><br>
+<hr>
+
+
 
 <!-- 
   Example of how to update a value in CiviCRM using AJAX. This example updates a field called Donor Date using what is selected in the menu.
@@ -90,8 +141,20 @@ if (empty($values)) {
   <option value="1"<?php echo $contact_json["custom_413"] == '1' ? ' selected="selected"' : '';?>>Contact for Appointment</option>
   <option value="2"<?php echo $contact_json["custom_413"] == '2' ? ' selected="selected"' : '';?>>Financial-Partner</option>
   <option value="3"<?php echo $contact_json["custom_413"] == '3' ? ' selected="selected"' : '';?>>Decided not to Give</option>
-</select>
 
+
+</select>
+<hr>
+<footer>
+    <p>Please visit our social media pages.</p>
+    <p></p>
+
+    <ul>
+        <span><li><a href="https://facebook.com" target="_blank"><img src="images/Facebook.png" width="30"></a></li></span>
+        <span><li><a href="https://youtube.com" target="_blank"><img src="images/YouTube.png" width="50"></a></li> </span>
+        <span><li><a href="https://twitter.com" target="_blank"><img src="images/Twitter.png" width="30"></a></li> </span>
+    </ul>
+</footer>
 
 <br><br><br>
 
